@@ -1,0 +1,30 @@
+@theme {
+  --color-obsidian: #111111;
+  --color-gallery-charcoal: #191719;
+  --color-soft-charcoal: #242024;
+  --color-deep-wine: #4a1725;
+  --color-burgundy: #681d2d;
+  --color-velvet-rose: #8a3448;
+  --color-rose-petal: #b85b6d;
+  --color-muted-blush: #d6a0a5;
+  --color-champagne-gold: #d9b77e;
+  --color-warm-ivory: #f0e5d8;
+  --color-display-ivory: #fff0d6;
+  --color-display-gold: #eac99b;
+  --color-muted-text: #b8aeb0;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-ui: Inter, Arial, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --page-atmosphere: linear-gradient(135deg, #111111 0%, #191719 48%, #24151b 100%);
+  --entrance-vignette:
+    radial-gradient(ellipse at 50% 42%, rgba(138, 52, 72, 0.24) 0%, transparent 58%),
+    #111111;
+  --burgundy-glass: linear-gradient(145deg, rgba(104, 29, 45, 0.72), rgba(35, 20, 26, 0.92));
+  --warm-gold-glow: radial-gradient(circle, rgba(217, 183, 126, 0.2) 0%, rgba(217, 183, 126, 0) 70%);
+  --finale-atmosphere:
+    radial-gradient(ellipse at 50% 55%, rgba(184, 91, 109, 0.3) 0%, rgba(74, 23, 37, 0.18) 35%, #111111 78%);
+  --letter-paper: linear-gradient(145deg, #f4ebdd 0%, #e8d9c8 100%);
+}
