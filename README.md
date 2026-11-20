@@ -17,8 +17,14 @@ second assets directory.
 
 Inter and Cormorant Garamond are bundled locally from Fontsource under the
 SIL Open Font License; the site no longer requests fonts from Google.
-The site remains local and has not been deployed. Because this collection contains
-personal photos, review access controls before choosing any hosting provider.
+The GitHub Pages workflow builds the site and deploys the `dist/` output on pushes
+to `main`. In the repository settings, set **Pages → Build and deployment → Source**
+to **GitHub Actions**. The project is configured for the repository URL
+`https://automationbynyx-tech.github.io/birthdayyy/`.
+
+Because this collection contains personal photos and a private letter, note that
+GitHub Pages sites are publicly accessible, even when their source repository is
+private. Review the content before enabling deployment.
 
 ## Run locally
 
