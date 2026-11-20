@@ -120,6 +120,28 @@ if (tbwUpperPhotoIndex < 0 || babuPhotoIndex < 0) {
   babuPhotoGroup.photos[babuPhotoIndex],
   tbwPhotoGroup.photos[tbwUpperPhotoIndex],
 ];
+const baidiPhotoGroup = NICKNAME_PHOTO_GROUPS.find(
+  ({ name }) => name === "Baidi",
+);
+if (!baidiPhotoGroup) {
+  throw new Error("Missing Baidi nickname photo group.");
+}
+const baidiPhotoIndex = baidiPhotoGroup.photos.findIndex(
+  ({ id }) => id === "portrait-03",
+);
+const babuCurrentPhotoIndex = babuPhotoGroup.photos.findIndex(
+  ({ id }) => id === "portrait-18",
+);
+if (baidiPhotoIndex < 0 || babuCurrentPhotoIndex < 0) {
+  throw new Error("Missing photo for the Baidi and Babu nickname swap.");
+}
+[
+  baidiPhotoGroup.photos[baidiPhotoIndex],
+  babuPhotoGroup.photos[babuCurrentPhotoIndex],
+] = [
+  babuPhotoGroup.photos[babuCurrentPhotoIndex],
+  baidiPhotoGroup.photos[baidiPhotoIndex],
+];
 const CAMERA_X = [0, -2.6, 4.2, 0, 0];
 const CAMERA_Y = [1.65, 1.65, 1.65, 4.1, 3.1];
 const NICKNAME_FOLLOWUP_LAST_Z =

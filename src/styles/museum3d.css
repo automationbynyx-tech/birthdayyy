@@ -677,13 +677,28 @@
   .museum3d-room-panel {
     top: 12px;
     left: 12px;
-    width: min(320px, calc(100% - 24px));
-    max-height: 43%;
-    padding: 14px;
+    width: min(260px, calc(100% - 24px));
+    max-height: 34%;
+    padding: 12px;
   }
 
   .museum3d-room-panel h1 {
-    font-size: 21px;
+    font-size: 19px;
+  }
+
+  .museum3d-accessible-content {
+    margin-top: 9px;
+  }
+
+  .museum3d-name-list {
+    gap: 4px;
+  }
+
+  .museum3d-name-list button {
+    min-height: 34px;
+    gap: 5px;
+    padding: 4px 5px;
+    font-size: 8px;
   }
 
   .museum3d-controls {
