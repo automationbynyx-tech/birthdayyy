@@ -11,6 +11,7 @@ import {
   Matrix4,
   MeshBasicMaterial,
   MeshStandardMaterial,
+  PerspectiveCamera,
   PointLight,
   SRGBColorSpace,
   Shape,
@@ -1567,8 +1568,14 @@ function WalkController({
   reducedMotion,
   onRoomChange,
 }: Pick<MuseumWorldProps, "scrollProgress" | "reducedMotion" | "onRoomChange">) {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
   const lastRoom = useRef(-1);
+
+  useEffect(() => {
+    if (!(camera instanceof PerspectiveCamera)) return;
+    camera.fov = size.width <= 760 ? 82 : 66;
+    camera.updateProjectionMatrix();
+  }, [camera, size.width]);
 
   useFrame((_, delta) => {
     const progress = Math.max(0, Math.min(1, scrollProgress));
@@ -1643,6 +1650,15 @@ function WalkController({
       lookAtX = lerp(from.lookAt[0], to.lookAt[0], pathPhase);
       lookAtY = lerp(from.lookAt[1], to.lookAt[1], pathPhase);
       lookAtZ = lerp(from.lookAt[2], to.lookAt[2], pathPhase);
+      if (size.width <= 760) {
+        const gateApproach = smoothstep(
+          Math.max(0, Math.min(1, (phase - 0.72) / 0.14)),
+        );
+        const gateDeparture = smoothstep(
+          Math.max(0, Math.min(1, (phase - 0.92) / 0.08)),
+        );
+        targetZ += 3.8 * (gateApproach - gateDeparture);
+      }
     } else if (segment === 2) {
       const waypointIndex = Math.max(
         1,

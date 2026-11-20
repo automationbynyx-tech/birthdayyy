@@ -8,7 +8,7 @@ import {
   useState,
   type WheelEvent,
 } from "react";
-import { ArrowDown, Flower2, Heart } from "lucide-react";
+import { ArrowDown, ChevronDown, Flower2, Heart } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { BotanicalSprig, FloatingPetals } from "./ArtMotifs";
 import MuseumShell from "./MuseumShell";
@@ -193,6 +193,7 @@ export default function Museum3DShell() {
   const [worldReady, setWorldReady] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [markedNames, setMarkedNames] = useState<string[]>([]);
   const [selectedPhoto, setSelectedPhoto] = useState<MuseumPhoto | null>(null);
@@ -246,6 +247,7 @@ export default function Museum3DShell() {
 
   const handleRoomChange = useCallback((index: number) => {
     setActiveIndex(index);
+    setMobilePanelOpen(false);
   }, []);
 
   useEffect(
@@ -532,13 +534,30 @@ export default function Museum3DShell() {
               </Suspense>
               {(entryLoading || !worldReady) && <HeartLoadingIndicator />}
 
-              <aside className="museum3d-room-panel" aria-live="polite">
-                <span className="museum3d-kicker">
-                  {activeExhibit.number} / {activeExhibit.name}
-                </span>
-                <h1>{activeExhibit.title}</h1>
-                <p>{activeExhibit.description}</p>
-                <div className="museum3d-accessible-content">
+              <aside
+                className={`museum3d-room-panel${mobilePanelOpen ? " is-expanded" : " is-collapsed"}`}
+                aria-live="polite"
+              >
+                <button
+                  type="button"
+                  className="museum3d-room-panel-toggle"
+                  aria-expanded={mobilePanelOpen}
+                  aria-controls="museum3d-room-panel-content"
+                  onClick={() => setMobilePanelOpen((open) => !open)}
+                >
+                  <span>{activeExhibit.number} / {activeExhibit.name}</span>
+                  <ChevronDown size={16} aria-hidden="true" />
+                </button>
+                <div
+                  className="museum3d-room-panel-content"
+                  id="museum3d-room-panel-content"
+                >
+                  <span className="museum3d-kicker">
+                    {activeExhibit.number} / {activeExhibit.name}
+                  </span>
+                  <h1>{activeExhibit.title}</h1>
+                  <p>{activeExhibit.description}</p>
+                  <div className="museum3d-accessible-content">
                   {activeIndex === 0 && (
                     <p>Scroll forward to begin exploring.</p>
                   )}
@@ -603,6 +622,7 @@ export default function Museum3DShell() {
                       one will keep growing.
                     </p>
                   )}
+                  </div>
                 </div>
               </aside>
 
